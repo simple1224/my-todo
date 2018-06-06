@@ -1,11 +1,11 @@
 <template>
   <div class="task-list">
     <div class="task-item">
-      <span><input class="complete" type="checkbox" @change = "handleCheck"></span>
+      <span><input class="complete" type="checkbox" @click = "handleChange"></span>
       <span class="task-content">{{content}} {{currentTime}}</span>
       <span class="fr">
-        <span class="action delete" @click ="handleDelete"> 删除</span>
-        <span class="action detail"> 详细</span>
+          <span class="action delete" @click ="handleDelete" > 删除 </span>
+        <span class="action detail" @click="detailShow"> 详细</span>
         </span>
     </div>
   </div>
@@ -16,24 +16,31 @@
 export default {
     props:['content','index'],
     data(){
-      var date = new Date()
-      var month = date.getMonth()+1
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth()+1;
       var day = date.getDate();
       var time = date.getHours();
       var minutes = date.getMinutes();
       var seconds = date.getSeconds();
       return {
-          currentTime: month+" "+day+"-"+time+":"+minutes+":"+seconds
+          currentTime: year+"年"+month+"月"+day+"日"+"  "+time+":"+minutes+":"+seconds
       }
+
     },
     methods: {
         handleDelete(){
             //$emit触发当前实例上的事件。附加参数都会传给监听器回调。
+            //delete-item是时间名
             this.$emit('delete-item',this.index)
         },
-        handleCheck(){
+        handleChange(){
             this.$emit('change-item',this.index)
+        },
+        detailShow(){
+            this.$emit('detail-item',this.index)
         }
+
     }
 }
 </script>
@@ -61,5 +68,14 @@ export default {
     }
     .fr{
       float: right;
+    }
+    .task-content{
+        color: red;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
 </style>
