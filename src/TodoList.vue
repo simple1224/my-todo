@@ -27,11 +27,13 @@ export default {
     },
     //使用脚手架时 data由一个对象变成一个函数
     //以下写法相当于 data : function()
-    data (){
+    data (){   
         return{
+            currentTime: '',
             title:'to do my list!',
             inputValue : '',
             list:[],
+            flag: true
             // isFinished:false
             // list: Store.fetch()
         }
@@ -46,12 +48,22 @@ export default {
         }
     },*/
     methods :{
-        handleSubmit (){
+        handleSubmit (index){
               if(!this.inputValue == "") {
-                  this.list.unshift(this.inputValue)
+
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth()+1;
+                var day = date.getDate();
+                var time = date.getHours();
+                var minutes = date.getMinutes();
+                var seconds = date.getSeconds();
+                var currentTime = year+"年"+month+"月"+day+"日"+"  "+time+":"+minutes+":"+seconds
+                  console.log(currentTime)
+                  this.list.unshift(currentTime + "\t"+this.inputValue)
                   //this的指向是当前的实例
                   this.inputValue = ''
-                  // Store.save()
+                   // Store.save()
               }
         },
         handleDelete (index){
@@ -61,29 +73,32 @@ export default {
             // this.list.length = 0;
             this.list.splice(index)
         },
-        handleChange(){
+        handleChange(index){
             // item.isFinished = !item.isFinished
-            console.log(this.inputValue)
+            this.list[index]
+            console.log()
          },
-        detailShow(){
-            var tpl =
-                '<form>'+
-                '<div class="content">'+
-                 "sdshkh"+
-                '</div>'+
-                '<div class="input_item">'+
-                '<input style="display: none;" type="text" name="content" value="' + (item.content || '') + '"></div>' +
-                '<div>'+
-                '<div class="desc input_item">'+
-                '<textarea  name="desc"> '+ (item.desc || '') + ' </textarea>'+
-                '</div>'+
-                '</div>'+
-                '<div class="remind input_item">'+
-                '<label>提醒时间</label>'+
-                '<input class="datetime" name="remind_date" type="text" value="'+ (item.remind_date || '') +'">'+
-                '</div>'+
-                '<div class="input_item"><button type="submit">更新</button></div>'+
-                '</form>';
+        detailShow(index){
+            var tmp = this.list[index].split("\t")
+            alert(tmp[1])
+            // alert(
+            //     '<form>'+
+            //     '<div class="content">'+
+            //      "sdshkh"+
+            //     '</div>'+
+            //     '<div class="input_item">'+
+            //     '<input style="display: none;" type="text" name="content" value="' + index + '"></div>' +
+            //     '<div>'+
+            //     '<div class="desc input_item">'+
+            //     '<textarea  name="desc"> '+ "xxxxx" + ' </textarea>'+
+            //     '</div>'+
+            //     '</div>'+
+            //     '<div class="remind input_item">'+
+            //     '<label>提醒时间</label>'+
+            //     '<input class="datetime" name="remind_date" type="text" value="'+ "xxxx" +'">'+
+            //     '</div>'+
+            //     '<div class="input_item"><button type="submit">更新</button></div>'+
+            //     '</form>') ;
         }
       }
 }
@@ -129,6 +144,9 @@ export default {
    border-radius: 3px;
    padding: 10px;
    border: 0;
+ }
+ .tmp{
+     float: right;
  }
 </style>
 

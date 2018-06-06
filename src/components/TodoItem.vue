@@ -2,7 +2,7 @@
   <div class="task-list">
     <div class="task-item">
       <span><input class="complete" type="checkbox" @click = "handleChange"></span>
-      <span class="task-content">{{content}} {{currentTime}}</span>
+      <span class="task-content">{{content}}</span>
       <span class="fr">
           <span class="action delete" @click ="handleDelete" > 删除 </span>
         <span class="action detail" @click="detailShow"> 详细</span>
@@ -15,19 +15,12 @@
 <script>
 export default {
     props:['content','index'],
-    data(){
-      var date = new Date();
-      var year = date.getFullYear();
-      var month = date.getMonth()+1;
-      var day = date.getDate();
-      var time = date.getHours();
-      var minutes = date.getMinutes();
-      var seconds = date.getSeconds();
-      return {
-          currentTime: year+"年"+month+"月"+day+"日"+"  "+time+":"+minutes+":"+seconds
-      }
-
-    },
+    // data(){
+    //     tmpTime:''
+    //   return {
+    //       tmpTime:this.currentTime
+    //   }
+    // },
     methods: {
         handleDelete(){
             //$emit触发当前实例上的事件。附加参数都会传给监听器回调。
