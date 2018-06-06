@@ -23,7 +23,7 @@ export default {
       var minutes = date.getMinutes();
       var seconds = date.getSeconds();
       return {
-          currentTime: month+":"+day+"-"+time+":"+minutes+":"+seconds
+          currentTime: month+" "+day+"-"+time+":"+minutes+":"+seconds
       }
     },
     methods: {

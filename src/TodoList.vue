@@ -1,7 +1,6 @@
 <template>
   <div class="container" >
     <div class="add-task">
-      <!--<input v-model="inputValue">-->
       <h1>to do my list!</h1>
       <input v-model="inputValue" name="content" type="text"  placeholder="e.g.今天记得学习"
              autofocus="autofocus" autocomplete="off">
@@ -11,7 +10,7 @@
 
     <todo-item v-for = "(item,index) of list" :key="index"  :content="item" :index="index"
                @delete-item="handleDelete"
-      @change-item="handleChange">
+               @change-item="handleChange">
     </todo-item>
 </div>
 </template>
@@ -41,14 +40,15 @@ export default {
         handleDelete (index){
             this.list.splice(index,1)
         },
-        handleDeleteAll(){
-            this.list.length = 0;
+        handleDeleteAll(index){
+            // this.list.length = 0;
+            this.list.splice(index)
         },
-      handleChange(index){
+        handleChange(index){
             console.log(index)
-         this.list.hidden
-//            console.log(.cssText)
-//              .cssText("color","green")
+         this.list.complete = true
+            this.list.push
+
       }
     }
 }
